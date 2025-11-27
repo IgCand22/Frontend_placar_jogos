@@ -28,12 +28,17 @@ h1 {
 
 #placar-content1 {
     padding-left: 80px;
-}
-
-#placar-list {
     text-align: center;
     background-color: azure;
     font-size: 18px;
     width: 300px;
     margin-bottom: 10px;
+}
+
+#placar-list {
+    /* text-align: center;
+    background-color: azure;
+    font-size: 18px;
+    width: 300px;
+    margin-bottom: 10px; */
 }

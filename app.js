@@ -1,11 +1,13 @@
 const placar_title = document.getElementById('placar-title');
 const placar_content = document.getElementById('placar-content1');
 const btn_procurar = document.getElementById('procurar-btn');
+const criar_jogo = document.getElementById('criar-jogo');
 
-btn_procurar.addEventListener('click', procurarJogo)
+criar_jogo.addEventListener('click', criarJogo);
+btn_procurar.addEventListener('click', procurarJogo);
 
 async function fetchJogos() {
-    const response = await fetch('http://18.228.245.137:3000/jogos');
+    const response = await fetch('http://56.125.224.214:3000/jogos');
     const jogos = await response.json();
 
     placar_content.innerHTML = ' '
@@ -24,7 +26,7 @@ async function fetchJogos() {
 };
 
 async function deleteProduct(id) {
-    const response = await fetch('http://18.228.245.137:3000/jogos/' + id, {
+    const response = await fetch('http://56.125.224.214:3000/jogos/' + id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -52,18 +54,32 @@ async function deleteProduct(id) {
 
 async function procurarJogo() {
     const input = document.getElementById('procurar_jogos');
-    const div = document.getElementById('placar-content2');
-    div.innerHTML = ' '
+    placar_content.innerHTML = ' '
+
+    if(input.value === ''){
+        fetchJogos();
+        return;
+    }
 
     let id = parseInt(input.value);
 
-    const response = await fetch(`http://18.228.245.137:3000/jogos/${id}`);
+    const response = await fetch(`http://56.125.224.214:3000/jogos/${id}`);
     const jogo = await response.json();
 
-    div.innerHTML =
+    if(jogo.length === 0){
+        alert("Não foi encontrado nenhum jogo. Por favor digite outro ID!")
+        fetchJogos();
+        return;
+    }
+
+    placar_content.innerHTML =
         `<div>
             <p>${jogo[0].mandante} ${jogo[0].placar_mandante} X ${jogo[0].placar_convidado} ${jogo[0].convidado}</p> 
             <button onclick="editProduct(${jogo[0].id})">Editar</button><button onclick="deleteProduct(${jogo[0].id})">Remover</button>
         </div>`
 
+};
+
+async function criarJogo() {
+    alert("deu certo")
 }
