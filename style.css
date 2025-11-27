@@ -43,7 +43,7 @@ h1 {
     text-align: center;
     background-color: azure;
     font-size: 18px;
-    width: 300px;
+    width: 800px;
     margin-bottom: 10px;
 }
 
@@ -54,3 +54,29 @@ h1 {
     width: 300px;
     margin-bottom: 10px; */
 }
+
+/* espaçamento entre as linhas */
+.placar-list {
+    margin-bottom: 12px;   
+}
+
+/* Container interno da linha */
+.placar-list div {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 10px;
+}
+
+/* Texto do jogo ocupa espaço fixo, alinhando os botões */
+.placar-list span {
+    min-width: 420px;  
+    display: inline-block;
+}
+
+/* Alinhamento dos botões */
+.placar-list button {
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
