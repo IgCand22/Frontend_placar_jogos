@@ -193,22 +193,38 @@ async function procurarJogo() {
 //função para criar exibir a parte da página que cria um novo jogo a partir do formulário
 function formularioCriarJogo() {
     placar_content1.innerHTML =
-        `<p>Criar jogo</p>
-         <form id="form-create">
+        `<p style="margin-bottom: 15px; margin-top: 15px">Criar jogo</p>
+         <form id="form-create" style="display: flex; flex-direction: column; gap: 10px;">
 
-             <label for="mandante">Mandante</label>
-             <input name="mandante" id="mandante" type="text" placeholder="Digite o mandante">
+             <div>
+                 <label for="mandante">Mandante</label>
+                 <input name="mandante" id="mandante" type="text" placeholder="Digite o mandante">
+             </div>
 
-             <label for="convidado-input">Convidado</label>
-             <input name="convidado" id="convidado-input" type="text" placeholder="Digite o convidado">
-         
-             <button type="submit">Criar</button>
-             <button type="button" id="cancelar-criacao">Cancelar</button>
+             <div>
+                 <label for="placar_mandante">Placar Mandante</label>
+                 <input name="placar_mandante" id="placar_mandante" type="number" min="0" value="0">
+             </div>
+
+             <div>
+                 <label for="convidado-input">Convidado</label>
+                 <input name="convidado" id="convidado-input" type="text" placeholder="Digite o convidado">
+             </div>
+
+             <div>
+                 <label for="placar_convidado">Placar Convidado</label>
+                 <input name="placar_convidado" id="placar_convidado" type="number" min="0" value="0">
+             </div>
+
+             <div style="margin-top: 10px;">
+                 <button type="submit">Criar</button>
+                 <button type="button" id="cancelar-criacao">Cancelar</button>
+             </div>
+
          </form>`;
 
     const form_create = document.getElementById('form-create');
     const btnCancelar = document.getElementById('cancelar-criacao');
-
 
     btnCancelar.addEventListener('click', () => {
         placar_content1.innerHTML = '';
@@ -220,12 +236,16 @@ function formularioCriarJogo() {
         const formData = new FormData(form_create);
         const data = Object.fromEntries(formData.entries());
 
+        data.placar_mandante = parseInt(data.placar_mandante, 10) || 0;
+        data.placar_convidado = parseInt(data.placar_convidado, 10) || 0;
+
         criarJogo(data);
 
         placar_content1.innerHTML = '';
         fetchJogos();
     });
 }
+
 
 //função criar jogo no banco de dados
 async function criarJogo(data) {
