@@ -1,4 +1,4 @@
-const ip_public = 'localhost';
+const ip_public = '18.228.189.68';
 const placar_title = document.getElementById('placar-title');
 const placar_content = document.getElementById('placar-content1');
 const placar_content1 = document.getElementById('placar-content2');
@@ -42,9 +42,9 @@ function visualizarJogos(jogo, container) {
     const texto = document.createElement('span');
     // Formato: ID: {id} - mandante placar x placar convidado convidado
     texto.innerHTML =
-  `<b>ID: ${jogo.id}</b> - ${jogo.mandante} ` +
-  `${jogo.placar_mandante} X ${jogo.placar_convidado} ` +
-  `${jogo.convidado}`;
+        `<b>ID: ${jogo.id}</b> - ${jogo.mandante} ` +
+        `${jogo.placar_mandante} X ${jogo.placar_convidado} ` +
+        `${jogo.convidado}`;
 
     const btnEditar = document.createElement('button');
     btnEditar.textContent = 'Editar';
@@ -243,7 +243,7 @@ function formularioCriarJogo() {
         placar_content1.innerHTML = '';
     });
 
-    form_create.addEventListener('submit', function (event) {
+    form_create.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const formData = new FormData(form_create);
@@ -266,10 +266,10 @@ async function criarJogo(data) {
     console.log(data);
 
     fetch(`http://${ip_public}:3000/jogos/createJogos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro na requisição: ' + response.statusText);
