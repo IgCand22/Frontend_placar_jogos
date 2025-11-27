@@ -20,40 +20,14 @@ h1 {
     text-align: center;
 }
 
-main {
-    flex: 1;
-    /* empurra o footer para baixo */
-}
-
 #placar-conteiner {
-    display: flex;
-    justify-content: center;
-    /* centra horizontalmente */
-    margin-top: 10px;
-}
-
-#placar-content {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
-
-/* Tela média */
-
-@media (max-width: 900px) {
-    #placar-content {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-
-/* Tela pequena (celular) */
-
-@media (max-width: 600px) {
-    #placar-content {
-        grid-template-columns: 1fr;
-    }
+#placar-content1 {
+    padding-left: 80px;
 }
 
 #placar-list {
@@ -62,13 +36,4 @@ main {
     font-size: 18px;
     width: 300px;
     margin-bottom: 10px;
-}
-
-footer {
-    background-color: aliceblue;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    /* centra verticalmente */
-    padding-left: 20px;
 }
