@@ -1,4 +1,4 @@
-const ip_public = '';
+const ip_public = 'localhost';
 const placar_title = document.getElementById('placar-title');
 const placar_content = document.getElementById('placar-content1');
 const placar_content1 = document.getElementById('placar-content2');
@@ -11,7 +11,10 @@ btn_procurar.addEventListener('click', procurarJogo);
 //função carregar os jogos a partir do banco de dados
 async function fetchJogos() {
     const response = await fetch(`http://${ip_public}:3000/jogos`);
-    const jogos = await response.json();
+    let jogos = await response.json();
+
+    //ordenado pelo id
+    jogos.sort((a, b) => Number(a.id) - Number(b.id));
 
     placar_content.innerHTML = '';
 
@@ -26,14 +29,22 @@ async function fetchJogos() {
     });
 }
 
+
 //função para visualização dos jogos
 function visualizarJogos(jogo, container) {
     container.innerHTML = '';
 
-    const div = document.createElement('div');
+    const linha = document.createElement('div');
+    linha.style.display = 'flex';
+    linha.style.alignItems = 'center';
+    linha.style.gap = '8px';
 
-    const p = document.createElement('p');
-    p.textContent = `${jogo.mandante} ${jogo.placar_mandante} X ${jogo.placar_convidado} ${jogo.convidado}`;
+    const texto = document.createElement('span');
+    // Formato: ID: {id} - mandante placar x placar convidado convidado
+    texto.innerHTML =
+  `<b>ID: ${jogo.id}</b> - ${jogo.mandante} ` +
+  `${jogo.placar_mandante} X ${jogo.placar_convidado} ` +
+  `${jogo.convidado}`;
 
     const btnEditar = document.createElement('button');
     btnEditar.textContent = 'Editar';
@@ -47,12 +58,13 @@ function visualizarJogos(jogo, container) {
         deletarJogo(jogo.id);
     });
 
-    div.appendChild(p);
-    div.appendChild(btnEditar);
-    div.appendChild(btnRemover);
+    linha.appendChild(texto);
+    linha.appendChild(btnEditar);
+    linha.appendChild(btnRemover);
 
-    container.appendChild(div);
+    container.appendChild(linha);
 }
+
 
 //função para edição dos jogos e salvar no banco de dados
 function editarJogo(jogo, container) {
@@ -248,6 +260,7 @@ function formularioCriarJogo() {
 
 
 //função criar jogo no banco de dados
+//função criar jogo no banco de dados
 async function criarJogo(data) {
     console.log(data);
 
@@ -260,10 +273,10 @@ async function criarJogo(data) {
             if (!response.ok) {
                 throw new Error('Erro na requisição: ' + response.statusText);
             }
-            return response.json();
+            return response.text();
         })
-        .then(data => {
-            console.log('Sucesso:', data);
+        .then(texto => {
+            console.log('Sucesso:', texto);
         })
         .catch((error) => {
             console.error('Erro:', error);
