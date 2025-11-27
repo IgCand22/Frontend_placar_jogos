@@ -117,6 +117,7 @@ function editarJogo(jogo, container) {
             convidado: convidadoInput.value
         };
         updateJogo(jogo.id, data);
+        fetchJogos();
     });
 
     const btnCancelar = document.createElement('button');
