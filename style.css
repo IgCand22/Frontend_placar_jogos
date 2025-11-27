@@ -15,6 +15,15 @@ nav {
     padding-left: 20px;
 }
 
+#criar-jogo {
+   margin-left: 30px;
+   cursor: pointer;
+}
+
+#div-procura {
+   margin-left: 50px;
+}
+
 h1 {
     margin-top: 5px;
     text-align: center;
